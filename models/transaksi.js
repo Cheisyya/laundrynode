@@ -27,27 +27,26 @@ module.exports = (sequelize, DataTypes) => {
         as: "admin"
       })
     }
-    
   }
-  transaksi.init({ 
+  transaksi.init({
     transaksi_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
-  },
-  member_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false  // data customer harus diisi dulu
-  },
-  outlet_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false  // data customer harus diisi dulu
-  },
-  admin_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false  // data customer harus diisi dulu
-  },
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
+    member_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false  // data customer harus diisi dulu
+    },
+    admin_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false  // data customer harus diisi dulu
+    },
+    outlet_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false  // data customer harus diisi dulu
+    },
     tgl: DataTypes.DATE,
     batas_waktu: DataTypes.DATE,
     tgl_bayar: DataTypes.DATE,

@@ -10,25 +10,22 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.outlet, {
-        foreignKey: "outlet_id",
-        as: "outlet"
-      })
       this.hasMany(models.transaksi, {
         foreignKey: "admin_id",
         as: "transaksi"
       })
+      this.hasMany(models.outlet, {
+        foreignKey: "admin_id",
+        as: "outlet"
+      })
     }
+    
   }
   admin.init({
     admin_id: {
       type:DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
-    },
-    outlet_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false  // data customer harus diisi dulu
     },
     name: DataTypes.STRING,
     username: DataTypes.STRING,

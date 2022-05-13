@@ -30,7 +30,22 @@ app.get("/", async (request, response) => {
     return response.json(dataTransaksi)
 })
 
-//get by id outlet 
+// //get outlet_id tidak detail
+// app.get("/:outlet_id", (req, res) =>{
+//     transaksi.findAll({ where: {outlet_id: req.params.outlet_id}})
+//     .then(result => {
+//         res.json({
+//             transaksi: result
+//         })
+//     })
+//     .catch(error => {
+//         res.json({
+//             message: error.message
+//         })
+//     })
+// })
+
+//get by id outlet all
 app.get("/:outlet_id", async (req, res) =>{
     let param = { outlet_id: req.params.outlet_id}
     let result = await transaksi.findAll({

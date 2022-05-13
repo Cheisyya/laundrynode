@@ -1,29 +1,24 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('paket', {
-      paket_id: {
+    await queryInterface.createTable('admin', {
+      admin_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      outlet_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "outlet",
-          key: "outlet_id"
-        }
-      },
-      jenis: {
+      name: {
         type: Sequelize.STRING
       },
-      satuan: {
-        type: Sequelize.ENUM('kg', 'pcs')
+      username: {
+        type: Sequelize.STRING
       },
-      harga: {
-        type: Sequelize.INTEGER
+      password: {
+        type: Sequelize.STRING
+      },
+      role: {
+        type: Sequelize.ENUM('admin', 'kasir','owner')
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('paket');
+    await queryInterface.dropTable('admin');
   }
 };

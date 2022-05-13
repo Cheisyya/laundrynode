@@ -1,32 +1,29 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('admin', {
-      admin_id: {
+    await queryInterface.createTable('outlet', {
+      outlet_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      outlet_id: {
+      admin_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "outlet",
-          key: "outlet_id"
+          model: "admin",
+          key: "admin_id"
         }
       },
-      name: {
+      name_outlet: {
         type: Sequelize.STRING
       },
-      username: {
+      alamat: {
         type: Sequelize.STRING
       },
-      password: {
+      tlp: {
         type: Sequelize.STRING
-      },
-      role: {
-        type: Sequelize.ENUM('admin', 'kasir','owner')
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('admin');
+    await queryInterface.dropTable('outlet');
   }
 };

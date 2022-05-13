@@ -13,10 +13,11 @@ const model = require('../models/index')
 const req = require("express/lib/request")
 const res = require("express/lib/response")
 const outlet = model.outlet
+const admin = model.admin
 
 // //import auth
 const auth = require("../auth")
-// app.use(auth)
+app.use(auth)
 const jwt = require("jsonwebtoken")
 const SECRET_KEY = "TokoLaundry"
 
@@ -35,10 +36,27 @@ app.get("/", (req, res) =>{
             })
         }) 
     })
+    
+    //get outlet by admin id
+    app.get("/:admin_id", (req, res) =>{
+        outlet.findAll({ where: {admin_id: req.params.admin_id}})
+        .then(result => {
+            res.json({
+                outlet: result
+            })
+        })
+        .catch(error => {
+            res.json({
+                message: error.message
+            })
+        })
+    })
+
 
 //post data baru outlet
 app.post("/", (req,res) => {
     let data = {
+        admin_id : req.body.admin_id,
         name_outlet : req.body.name_outlet,
         alamat : req.body.alamat,
         tlp : req.body.tlp
@@ -78,6 +96,7 @@ app.put("/:id", (req, res) => {
         outlet_id : req.params.id
     }
     let data = {
+        admin_id : req.body.admin_id,
         name_outlet : req.body.name_outlet,
         alamat : req.body.alamat,
         tlp : req.body.tlp

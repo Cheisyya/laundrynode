@@ -17,15 +17,21 @@ const outlet = models.outlet
 const auth = require("../auth")
 app.use(auth)//harus login baru bisa akese endpoint
 
-// endpoint get admin
-app.get("/", async (req, res) => {
-    let dataPaket = await paket.findAll({
-        include: [
-            { model: models.outlet, as: "outlet"}
-        ]
+// endpoint get paket
+app.get("/", (req, res) =>{
+    paket.findAll()
+        .then(paket => {
+            res.json({
+                count : paket.length,
+                paket : paket
+            })
+        })
+        .catch(error => {
+            res.json({
+                mesaage: error.mesaage
+            })
+        }) 
     })
-    return res.json(dataPaket)
-})
 
 //get find one
 app.get("/:paket_id", (req, res) =>{
@@ -45,7 +51,6 @@ app.get("/:paket_id", (req, res) =>{
 //post data paket
 app.post("/", (req,res) => {
     let data = {
-        outlet_id : req.body.outlet_id,
         jenis : req.body.jenis,
         satuan : req.body.satuan,
         harga : req.body.harga
@@ -70,7 +75,6 @@ app.put("/:id", (req, res) => {
         paket_id : req.params.id
     }
     let data = {
-        outlet_id : req.body.outlet_id,
         jenis : req.body.jenis,
         satuan : req.body.satuan,
         harga : req.body.harga

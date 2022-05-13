@@ -21,20 +21,26 @@ app.use(auth)
 const jwt = require("jsonwebtoken")
 const SECRET_KEY = "TokoLaundry"
 
-// endpoint get admin
-app.get("/", async (req, res) => {
-    let dataAdmin = await admin.findAll({
-        include: [
-            { model: model.outlet, as: "outlet"}
-        ]
+//Endpoint menampilkan semua data Admin, METHOD : GET, Function : FINDALL()
+app.get("/", (req, res) =>{
+    admin.findAll()
+        .then(admin => {
+            res.json({
+                count : admin.length,
+                admin : admin
+            })
+        })
+        .catch(error => {
+            res.json({
+                mesaage: error.mesaage
+            })
+        }) 
     })
-    return res.json(dataAdmin)
-})
+
 
 //post data baru admin
 app.post("/", (req,res) => {
     let data = {
-        outlet_id : req.body.outlet_id,
         name : req.body.name,
         username : req.body.username,
         password : md5 (req.body.password),
@@ -60,7 +66,6 @@ app.put("/:id", (req, res) => {
         admin_id : req.params.id
     }
     let data = {
-        outlet_id : req.body.outlet_id,
         name : req.body.name,
         username : req.body.username,
         password : md5 (req.body.password),

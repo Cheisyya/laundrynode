@@ -10,17 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasMany(models.admin, {
-        foreignKey: "outlet_id",
+      this.belongsTo(models.admin, {
+        foreignKey: "admin_id",
         as: "admin"
-      })
-      this.hasMany(models.paket, {
-        foreignKey: "outlet_id",
-        as: "paket"
-      })
-      this.hasMany(models.transaksi, {
-        foreignKey: "outlet_id",
-        as: "transaksi"
       })
     }
   }
@@ -29,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
+    },
+    admin_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false  // data customer harus diisi dulu
     },
     name_outlet: DataTypes.STRING,
     alamat: DataTypes.STRING,
@@ -39,5 +35,4 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'outlet'
   });
   return outlet;
-  
 };

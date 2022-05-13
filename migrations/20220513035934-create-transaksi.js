@@ -16,20 +16,20 @@ module.exports = {
           key: "member_id"
         }
       },
-      outlet_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "outlet",
-          key: "outlet_id"
-        }
-      },
       admin_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "admin",
           key: "admin_id"
+        }
+      },
+      outlet_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "outlet",
+          key: "outlet_id"
         }
       },
       tgl: {
